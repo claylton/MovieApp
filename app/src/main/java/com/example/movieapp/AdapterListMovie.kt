@@ -1,6 +1,5 @@
 package com.example.movieapp
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +12,11 @@ import com.example.movieapp.model.MovieListItem
 
 class AdapterListMovie( var context: Context, var list_movie: List<MovieListItem>) : RecyclerView.Adapter<RecycleViewHolder>() {
 
+   // private lateinit var itemClickListener: ItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecycleViewHolder {
         val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.movie_list_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.fragment_movie_list_item, parent, false)
 
         return RecycleViewHolder(view)
     }
@@ -35,6 +35,16 @@ class AdapterListMovie( var context: Context, var list_movie: List<MovieListItem
         return  list_movie.count()
     }
 
+ /*   inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        fun bindClickListener(position: Int) {
+            itemView.setOnClickListener {
+                itemClickListener.onItemClick(position)
+            }
+        }
+    }*/
+
+
 }
 
 class RecycleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -42,3 +52,7 @@ class RecycleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var movie_title =itemView.findViewById<TextView>(R.id.movie_title)
 
 }
+
+//interface ItemClickListener{
+  //  fun onItemClick(position: Int)
+//}
