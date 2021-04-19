@@ -1,18 +1,21 @@
 package com.example.movieapp
 
-import android.content.Context
+import android.app.Activity
+import android.os.Build
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.movieapp.model.MovieListItem
+import com.example.movieapp.model.Movie
 
-class AdapterListMovie( var context: Context, var list_movie: List<MovieListItem>) : RecyclerView.Adapter<RecycleViewHolder>() {
+class AdapterListMovie( var activity: Activity, var list_movie: MutableList<Movie>) : RecyclerView.Adapter<RecycleViewHolder>() {
 
-   // private lateinit var itemClickListener: ItemClickListener
+    //private var itemClickListener: ItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecycleViewHolder {
         val view: View =
@@ -23,36 +26,35 @@ class AdapterListMovie( var context: Context, var list_movie: List<MovieListItem
 
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
         Glide
-            .with(context)
+            .with(activity.applicationContext)
             .load(list_movie[position].image_movie)
             .centerCrop()
             .into(holder.image_movie)
 
         holder.movie_title.text = list_movie[position].title_movie
+
+        //chegando nulo
+        holder.image_movie.setOnClickListener { openMovieDetails(list_movie[position].imdbID) }
     }
 
     override fun getItemCount(): Int {
         return  list_movie.count()
     }
 
- /*   inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        fun bindClickListener(position: Int) {
-            itemView.setOnClickListener {
-                itemClickListener.onItemClick(position)
-            }
-        }
-    }*/
-
-
+    private fun openMovieDetails(imdbID: String) {
+        val bundle = Bundle()
+        bundle.putString(Build.ID, imdbID)
+        Navigation.findNavController(activity, R.id.myNavHostFragment)
+            .navigate(R.id.action_movieListFragment_to_moviesDetailsFragment, bundle)
+    }
+    fun onItemClick(position: Int) {
+        val movie = list_movie[position]
+        openMovieDetails(movie.imdbID)
+    }
 }
 
 class RecycleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
     var image_movie = itemView.findViewById<ImageView>(R.id.image_movie)
     var movie_title =itemView.findViewById<TextView>(R.id.movie_title)
-
 }
-
-//interface ItemClickListener{
-  //  fun onItemClick(position: Int)
-//}

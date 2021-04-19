@@ -8,14 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentMovieListBinding
-import com.example.movieapp.model.MovieListItem
+import com.example.movieapp.model.Movie
 import com.github.kittinunf.fuel.Fuel
 import com.google.gson.JsonParser
 
@@ -23,22 +20,27 @@ class MovieListFragment : Fragment() {
 
     lateinit var recyclerView: RecyclerView
     lateinit var editText: EditText
-    lateinit var movieItem: LinearLayout
-    private var moviesList = ArrayList<MovieListItem>()
+    //lateinit var movieItem: FragmentMovieListItemBinding
+    private var moviesList = ArrayList<Movie>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val biding: FragmentMovieListBinding = androidx.databinding.DataBindingUtil.inflate(
-            inflater, R.layout.fragment_movie_list,container,false
+            inflater, R.layout.fragment_movie_list, container, false
         )
-        //biding.listAllMovies.setOnClickListener(
-            //Navigation.createNavigateOnClickListener()
+       // biding.listAllMovies.setOnClickListener(
+         //   Navigation.createNavigateOnClickListener(R.id.details_movie)
+        //)
+        //biding.view
+
+        //movieItem.movieItem.setOnClickListener(
+        //  Navigation.createNavigateOnClickListener(R.id.details_movie)
         //)
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie_list, container, false)
+        return biding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,10 +48,16 @@ class MovieListFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.list_all_movies)
         editText = view.findViewById(R.id.inputBuscar)
-        //AQUI BUGAmovieItem = findViewById<LinearLayout>(R.id.movie_item)
+        //movieItem = view.findViewById(R.id.movie_item)
 
-        val adapterListMovie = context?.let { AdapterListMovie(it, moviesList) }
+        //movieItem.movieItem.setOnClickListener(
+         // Navigation.createNavigateOnClickListener(R.id.details_movie)
+        //)
 
+
+        //val adapterListMovie = context?.let { AdapterListMovie(it, moviesList) }
+
+        val adapterListMovie = activity?.let { it1 -> AdapterListMovie(it1, moviesList) }
         val layoutManager = GridLayoutManager(context, 2)
 
         recyclerView.layoutManager = layoutManager
@@ -65,7 +73,6 @@ class MovieListFragment : Fragment() {
             }
             false
         })
-
 
 
         //movieItem.setOnClickListener{
@@ -90,9 +97,10 @@ class MovieListFragment : Fragment() {
                     val rm = obj.get("Search").asJsonArray
 
                     for (i in rm) {
-                        var movie = i.asJsonObject
+                        val movie = i.asJsonObject
                         moviesList.add(
-                            MovieListItem(
+                            Movie(
+                                movie.get("imdbID").asString,
                                 movie.get("Title").asString,
                                 movie.get("Poster").asString
                             )
