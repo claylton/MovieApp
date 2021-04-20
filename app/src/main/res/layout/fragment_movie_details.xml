@@ -157,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_10_dp"
                     android:ellipsize="end"
-                    android:maxLines="5"
+                    android:maxLines="50"
                     android:textColor="@color/secondary_text_color"
                     android:textSize="@dimen/font_size_15_sp" />
 

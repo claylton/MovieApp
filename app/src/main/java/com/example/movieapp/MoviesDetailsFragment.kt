@@ -35,17 +35,18 @@ class MoviesDetailsFragment : Fragment() {
 
         var IDMovie = arguments?.getString("ID")
 
-        findMovie(IDMovie!!
+        findMovie(
+            IDMovie!!
         ) { movieDetails ->
 
-            var image: ImageView = view.findViewById<ImageView>(R.id.movie_poster_image_view)
-                Glide
+
+            /*    Glide
                     .with(view.context)
                     .load(movieDetails.Poster)
                     .centerCrop()
                     .into(image)
                 Log.d("xxx","Context $context")
-
+*/
             /*binding.titleTextView.text = movieDetails.Title
             binding.yearTextView.text = movieDetails.Year.toString()
             binding.ratedTextView.text = movieDetails.Rated
@@ -56,22 +57,40 @@ class MoviesDetailsFragment : Fragment() {
             binding.imdbRatingTextView.text = movieDetails.imdbRating
             binding.imdbVotesTextView.text = movieDetails.imdbVotes
             binding.directorTextView.text = movieDetails.Director*/
-            view.findViewById<TextView>(R.id.title_text_view).text = movieDetails.Title
-            view.findViewById<TextView>(R.id.year_text_view).text = movieDetails.Year.toString()
-            view.findViewById<TextView>(R.id.rated_text_view).text = movieDetails.Rated
-            view.findViewById<TextView>(R.id.runtime_text_view).text = movieDetails.Runtime
-            view.findViewById<TextView>(R.id.released_date_text_view).text = movieDetails.Released
-            view.findViewById<TextView>(R.id.meta_score_text_view).text = movieDetails.Metascore
-            view.findViewById<TextView>(R.id.plot_text_view).text = movieDetails.Plot
-            view.findViewById<TextView>(R.id.imdb_rating_text_view).text = movieDetails.imdbRating
-            view.findViewById<TextView>(R.id.imdb_votes_text_view).text = movieDetails.imdbVotes
-            view.findViewById<TextView>(R.id.director_text_view).text = movieDetails.Director
-            view.findViewById<TextView>(R.id.writer_text_view).text = movieDetails.Writer
-            view.findViewById<TextView>(R.id.actors_text_view).text = movieDetails.Actors
-            view.findViewById<TextView>(R.id.language_text_view).text = movieDetails.Language
-            view.findViewById<TextView>(R.id.country_text_view).text = movieDetails.Country
-            view.findViewById<TextView>(R.id.genre_text_view).text = movieDetails.Genre
-            view.findViewById<TextView>(R.id.awards_text_view).text = movieDetails.Awards
+            requireActivity().runOnUiThread {
+                kotlin.run {
+                    var image: ImageView = view.findViewById<ImageView>(R.id.movie_poster_image_view)
+                    Glide
+                        .with(view.context)
+                        .load(movieDetails.Poster)
+                        .centerCrop()
+                        .into(image)
+                    
+                    view.findViewById<TextView>(R.id.title_text_view).text = movieDetails.Title
+                    view.findViewById<TextView>(R.id.year_text_view).text =
+                        movieDetails.Year.toString()
+                    view.findViewById<TextView>(R.id.rated_text_view).text = movieDetails.Rated
+                    view.findViewById<TextView>(R.id.runtime_text_view).text = movieDetails.Runtime
+                    view.findViewById<TextView>(R.id.released_date_text_view).text =
+                        movieDetails.Released
+                    view.findViewById<TextView>(R.id.meta_score_text_view).text =
+                        movieDetails.Metascore
+                    view.findViewById<TextView>(R.id.plot_text_view).text = movieDetails.Plot
+                    view.findViewById<TextView>(R.id.imdb_rating_text_view).text =
+                        movieDetails.imdbRating
+                    view.findViewById<TextView>(R.id.imdb_votes_text_view).text =
+                        movieDetails.imdbVotes
+                    view.findViewById<TextView>(R.id.director_text_view).text =
+                        movieDetails.Director
+                    view.findViewById<TextView>(R.id.writer_text_view).text = movieDetails.Writer
+                    view.findViewById<TextView>(R.id.actors_text_view).text = movieDetails.Actors
+                    view.findViewById<TextView>(R.id.language_text_view).text =
+                        movieDetails.Language
+                    view.findViewById<TextView>(R.id.country_text_view).text = movieDetails.Country
+                    view.findViewById<TextView>(R.id.genre_text_view).text = movieDetails.Genre
+                    view.findViewById<TextView>(R.id.awards_text_view).text = movieDetails.Awards
+                }
+            }
         }
 
         Log.d("xxx", "ID MOVIE: $IDMovie")
