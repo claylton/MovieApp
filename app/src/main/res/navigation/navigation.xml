@@ -10,10 +10,16 @@
         android:label="MovieListFragment" >
         <action
             android:id="@+id/action_movieListFragment_to_moviesDetailsFragment"
-            app:destination="@id/moviesDetailsFragment" />
+            app:destination="@id/moviesDetailsFragment"
+            app:popUpTo="@id/movieListFragment" />
     </fragment>
     <fragment
         android:id="@+id/moviesDetailsFragment"
         android:name="com.example.movieapp.MoviesDetailsFragment"
-        android:label="MoviesDetailsFragment" />
+        android:label="MoviesDetailsFragment" >
+        <action
+            android:id="@+id/action_moviesDetailsFragment_to_movieListFragment"
+            app:destination="@id/movieListFragment"
+            app:popUpTo="@id/moviesDetailsFragment" />
+    </fragment>
 </navigation>

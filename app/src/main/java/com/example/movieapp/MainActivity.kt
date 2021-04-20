@@ -5,9 +5,13 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var drawerLayout: DrawerLayout
+
     private fun provideStartArgBundle() = Bundle()
     private fun setStartFragment(): Int = 0
 
@@ -23,10 +27,6 @@ class MainActivity : AppCompatActivity() {
         getNavController().setGraph(graph, provideStartArgBundle())
 
     }
-
-    //companion object {
-      //  const val ID = "ID"
-    //}
 
     fun FragmentActivity.getNavController(): NavController {
         return Navigation.findNavController(this, R.id.myNavHostFragment)

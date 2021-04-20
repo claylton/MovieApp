@@ -27,7 +27,7 @@ data class MovieDetails(
     var Metascore: String,
     var imdbRating: String,
     var imdbVotes: String,
-    var Ratings: List<Ratings>
+    var Ratings: ArrayList<Ratings>
 )
 
 data class Ratings(

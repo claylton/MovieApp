@@ -30,16 +30,6 @@ class MovieListFragment : Fragment() {
         val biding: FragmentMovieListBinding = androidx.databinding.DataBindingUtil.inflate(
             inflater, R.layout.fragment_movie_list, container, false
         )
-       // biding.listAllMovies.setOnClickListener(
-         //   Navigation.createNavigateOnClickListener(R.id.details_movie)
-        //)
-        //biding.view
-
-        //movieItem.movieItem.setOnClickListener(
-        //  Navigation.createNavigateOnClickListener(R.id.details_movie)
-        //)
-
-        // Inflate the layout for this fragment
         return biding.root
     }
 
@@ -48,14 +38,6 @@ class MovieListFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.list_all_movies)
         editText = view.findViewById(R.id.inputBuscar)
-        //movieItem = view.findViewById(R.id.movie_item)
-
-        //movieItem.movieItem.setOnClickListener(
-         // Navigation.createNavigateOnClickListener(R.id.details_movie)
-        //)
-
-
-        //val adapterListMovie = context?.let { AdapterListMovie(it, moviesList) }
 
         val adapterListMovie = activity?.let { it1 -> AdapterListMovie(it1, moviesList) }
         val layoutManager = GridLayoutManager(context, 2)
@@ -73,11 +55,6 @@ class MovieListFragment : Fragment() {
             }
             false
         })
-
-
-        //movieItem.setOnClickListener{
-        //  movieItem.findNavController().navigate(R.id.details_movie)
-        //}
     }
 
     private fun performSearch(adapterListMovie: AdapterListMovie) {

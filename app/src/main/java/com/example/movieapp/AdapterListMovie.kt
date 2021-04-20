@@ -33,7 +33,6 @@ class AdapterListMovie( var activity: Activity, var list_movie: MutableList<Movi
 
         holder.movie_title.text = list_movie[position].title_movie
 
-        //chegando nulo
         holder.image_movie.setOnClickListener { openMovieDetails(list_movie[position].imdbID) }
     }
 
@@ -43,7 +42,7 @@ class AdapterListMovie( var activity: Activity, var list_movie: MutableList<Movi
 
     private fun openMovieDetails(imdbID: String) {
         val bundle = Bundle()
-        bundle.putString(Build.ID, imdbID)
+        bundle.putString("ID", imdbID)
         Navigation.findNavController(activity, R.id.myNavHostFragment)
             .navigate(R.id.action_movieListFragment_to_moviesDetailsFragment, bundle)
     }
